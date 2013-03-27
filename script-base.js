@@ -19,7 +19,7 @@ function Generator() {
     try {
       this.env.options.appPath = require(path.join(process.cwd(), 'component.json')).appPath;
     } catch (e) {}
-    this.env.options.appPath = this.env.options.appPath || 'app';
+    this.env.options.appPath = this.env.options.appPath || 'web-app/angular/app';
   }
 
   if (typeof this.env.options.testPath === 'undefined') {
@@ -31,11 +31,12 @@ function Generator() {
 
   if (typeof this.env.options.coffee === 'undefined') {
     this.option('coffee');
+    this.appPath = this.env.options.appPath;
 
     // attempt to detect if user is using CS or not
     // if cml arg provided, use that; else look for the existence of cs
     if (!this.options.coffee &&
-      this.expandFiles('/' + this.appPath + '/scripts/**/*.coffee', {}).length > 0) {
+      this.expandFiles(this.appPath + '/**/*.coffee', {}).length > 0) {
       this.options.coffee = true;
     }
 
@@ -81,7 +82,7 @@ Generator.prototype.testTemplate = function (src, dest) {
 Generator.prototype.htmlTemplate = function (src, dest) {
   yeoman.generators.Base.prototype.template.apply(this, [
     src,
-    path.join(this.env.options.appPath, dest)
+    path.join(this.env.options.webAppPath, dest)
   ]);
 };
 

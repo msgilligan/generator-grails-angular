@@ -15,7 +15,8 @@ var Generator = module.exports = function Generator() {
     try {
       this.env.options.appPath = require(path.join(process.cwd(), 'component.json')).appPath;
     } catch (e) {}
-    this.env.options.appPath = this.env.options.appPath || 'app';
+    this.env.options.webAppPath = 'web-app;'
+    this.env.options.appPath = this.env.options.appPath || 'web-app/angular/app';
   }
   this.appPath = this.env.options.appPath;
 
@@ -25,7 +26,7 @@ var Generator = module.exports = function Generator() {
     // attempt to detect if user is using CS or not
     // if cml arg provided, use that; else look for the existence of cs
     if (!this.options.coffee &&
-      this.expandFiles(process.cwd() + '/' + this.appPath + '/scripts/**/*.coffee', {}).length > 0) {
+      this.expandFiles(process.cwd() + '/' + this.appPath + '/**/*.coffee', {}).length > 0) {
       this.options.coffee = true;
     }
 
@@ -74,6 +75,12 @@ Generator.prototype.askFor = function askFor() {
     message: 'If so, would you like to use Twitter Bootstrap for Compass (as opposed to vanilla CSS)?',
     default: 'Y/n',
     warning: 'Yes: All Twitter Bootstrap files will be placed into the styles directory.'
+  }, {
+    name: 'coffee',
+    message: 'Would you like to use CoffeeScript',
+    default: 'Y/n',
+    warning: 'Yes: CoffeeScript will be used for your Angular app'
+ 
   }];
 
   this.prompt(prompts, function(err, props) {
@@ -83,6 +90,7 @@ Generator.prototype.askFor = function askFor() {
 
     this.bootstrap = (/y/i).test(props.bootstrap);
     this.compassBootstrap = (/y/i).test(props.compassBootstrap);
+    this.env.options.coffee = (/y/i).test(props.coffee);
     cb();
   }.bind(this));
 };
@@ -135,7 +143,7 @@ Generator.prototype.bootstrapFiles = function bootstrapFiles() {
       cb();
     });
   } else if (this.bootstrap) {
-    this.log.writeln('Writing compiled Bootstrap');
+    this.log.writeln('Writing compiled Bootstrap to ' + this.appPath);
     this.copy( 'bootstrap.css', path.join(appPath, 'styles/bootstrap.css') );
   }
 
