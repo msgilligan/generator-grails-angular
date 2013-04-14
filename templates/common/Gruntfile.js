@@ -6,8 +6,6 @@ var mountFolder = function (connect, dir) {
 };
 
 module.exports = function (grunt) {
-  // load all grunt tasks
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   // configurable paths
   var yeomanConfig = {
@@ -254,8 +252,12 @@ module.exports = function (grunt) {
     }
   });
 
+  // load all grunt tasks
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  
   grunt.renameTask('regarde', 'watch');
   grunt.renameTask('bowerOrganiser', 'bower');
+
 
   grunt.registerTask('server', [
     'clean:server',
