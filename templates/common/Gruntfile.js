@@ -11,6 +11,8 @@ module.exports = function (grunt) {
   var yeomanConfig = {
     app: 'web-app',
     dist: 'dist',
+    jsTests: 'test/spec/js/**/*.js',
+    jsApp: 'web-app/js/app/**/*.js',
     appName: path.basename(process.cwd())
   };
 
@@ -24,6 +26,10 @@ module.exports = function (grunt) {
       coffee: {
         files: ['<%%= yeoman.app %>/**/{,*/}*.coffee'],
         tasks: ['coffee:dist']
+      },
+      js: {
+        files: ['Gruntfile.js, <%= yeoman.jsTests %>', '<%= yeoman.jsApp %>' ],
+        tasks: ['jshint:all']
       },
       coffeeTest: {
         files: ['test/spec/{,*/}*.coffee'],
@@ -90,11 +96,12 @@ module.exports = function (grunt) {
     },
     jshint: {
       options: {
-        jshintrc: '.jshintrc'
+        jshintrc: '.jshintrc',
+        force: true
       },
       all: [
         'Gruntfile.js',
-        '<%%= yeoman.app %>/js/{,*/}*.js'
+        '<%= yeoman.jsTests %>', '<%= yeoman.jsApp %>'
       ]
     },
     karma: {
