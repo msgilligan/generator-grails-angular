@@ -101,7 +101,8 @@ module.exports = function (grunt) {
       unit: {
         configFile: 'karma.conf.js',
         port: 9999,
-        singleRun: true
+        singleRun: false,
+        autoWatch: true
       }
     },
     coffee: {
@@ -275,6 +276,17 @@ module.exports = function (grunt) {
     // 'open',
     'watch'
   ]);
+
+  grunt.registerTask('dev:watch', [
+    'livereload-start',
+    'connect:livereload',
+    'watch'
+  ]);
+
+  grunt.registerTask('dev:test', [
+    'karma:unit'
+  ]);
+
 
   grunt.registerTask('test', [
     'clean:server',
