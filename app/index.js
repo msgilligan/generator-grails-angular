@@ -39,19 +39,19 @@ var Generator = module.exports = function Generator() {
     args.push('--minsafe');
   }
 
-  this.hookFor('angular:common', {
+  this.hookFor('grails-angular:common', {
     args: args
   });
 
-  this.hookFor('angular:main', {
+  this.hookFor('grails-angular:main', {
     args: args
   });
 
-  this.hookFor('angular:controller', {
+  this.hookFor('grails-angular:controller', {
     args: args
   });
 
-  this.hookFor('karma:app', {
+  this.hookFor('grails-karma:app', {
     args: [false] // run karma hook in non-interactive mode
   });
 

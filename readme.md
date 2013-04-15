@@ -1,4 +1,4 @@
-
+  
 Maintainer: [Zan Thrash](https://github.com/zanthrash)
 
 Based on [angular-seed](https://github.com/angular/angular-seed/)

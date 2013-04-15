@@ -106,16 +106,24 @@ module.exports = function (grunt) {
     },
     coffee: {
       dist: {
-        files: {
-          '.tmp/scripts/coffee.js': '<%%= yeoman.app %>/**/*.coffee'
-        }
-      },
-      test: {
         files: [{
           expand: true,
-          cwd: '.tmp/spec',
-          src: '*.coffee',
-          dest: 'test/spec'
+          cwd: 'web-app/angular/app/scripts',
+          src: '**/*.coffee',
+          dest: 'web-app/js/app',
+          ext: '.js'
+        }]
+      },
+      test: {
+        options: {
+          bare: true
+        },
+        files: [{
+          expand: true,
+          cwd: 'test/spec',
+          src: '**/*.coffee',
+          dest: 'test/spec/js',
+          ext: '.js'
         }]
       }
     },
@@ -225,13 +233,14 @@ module.exports = function (grunt) {
         }
       }
     },
-    bower: {
+    bowerOrganiser: {
       options: {
         includeName: true
       },
       mapping: {
-        js: 'lib',
-        css: 'css',
+        js: 'web-app/js/vendor',
+        css: 'web-app/css',
+        less: 'web-app/less'
       }
     },
     copy: {
@@ -254,10 +263,8 @@ module.exports = function (grunt) {
 
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-  
-  grunt.renameTask('regarde', 'watch');
-  grunt.renameTask('bowerOrganiser', 'bower');
 
+  grunt.renameTask('regarde', 'watch');
 
   grunt.registerTask('server', [
     'clean:server',
@@ -272,6 +279,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'clean:server',
     'coffee:test',
+    'coffee:dist',
     'compass',
     'connect:test',
     'karma'
