@@ -28,7 +28,7 @@ module.exports = function (grunt) {
         tasks: ['coffee:dist']
       },
       js: {
-        files: ['Gruntfile.js, <%= yeoman.jsTests %>', '<%= yeoman.jsApp %>' ],
+        files: ['Gruntfile.js, <%%= yeoman.jsTests %>', '<%%= yeoman.jsApp %>' ],
         tasks: ['jshint:all']
       },
       coffeeTest: {
@@ -101,7 +101,7 @@ module.exports = function (grunt) {
       },
       all: [
         'Gruntfile.js',
-        '<%= yeoman.jsTests %>', '<%= yeoman.jsApp %>'
+        '<%%= yeoman.jsTests %>', '<%%= yeoman.jsApp %>'
       ]
     },
     karma: {
