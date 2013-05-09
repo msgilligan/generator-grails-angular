@@ -19,7 +19,7 @@ function Generator() {
     try {
       this.env.options.appPath = require(path.join(process.cwd(), 'component.json')).appPath;
     } catch (e) {}
-    this.env.options.appPath = this.env.options.appPath || 'web-app/angular/app';
+    this.env.options.appPath = this.env.options.appPath || 'web-app/angular';
   }
 
   if (typeof this.env.options.testPath === 'undefined') {
