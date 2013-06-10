@@ -16,7 +16,7 @@ function Generator() {
   }
 
   if (this.name.substr(-10).toLowerCase() === 'controller') {
-    this.name = this.name.slice(0, -10);
+    this.injectableName = this.name.slice(0, -10);
   }
 
 }

@@ -1,6 +1,6 @@
 'use strict'
 
-describe 'Controller: <%= _.classify(name) %>Ctrl', () ->
+describe 'Controller: <%= _.classify(injectableName) %>Ctrl', () ->
 
   # load the controller's module
   beforeEach module '<%= _.camelize(appname) %>App'
@@ -11,7 +11,7 @@ describe 'Controller: <%= _.classify(name) %>Ctrl', () ->
   # Initialize the controller and a mock scope
   beforeEach inject ($controller) ->
     scope = {}
-    <%= _.classify(name) %>Ctrl = $controller '<%= _.classify(name) %>Ctrl', {
+    <%= _.classify(name) %>Ctrl = $controller '<%= _.classify(injectableName) %>Ctrl', {
       $scope: scope
     }
 
