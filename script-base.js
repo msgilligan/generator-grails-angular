@@ -22,6 +22,13 @@ function Generator() {
     this.env.options.appPath = this.env.options.appPath || 'web-app/angular';
   }
 
+  if (typeof this.env.options.indexFile === 'undefined') {
+    try {
+      this.env.options.indexFile = require(path.join(process.cwd(), 'bower.json')).indexFile
+    } catch (e) {}
+    this.env.options.indexFile = this.env.options.indexFile || 'grails-app/views/index.gsp'
+  }
+
   if (typeof this.env.options.testPath === 'undefined') {
     try {
       this.env.options.testPath = require(path.join(process.cwd(), 'bower.json')).testPath;
@@ -90,7 +97,6 @@ Generator.prototype.addScriptToIndex = function (script) {
   try {
     var appPath = this.env.options.appPath;
     var indexFile = this.env.options.indexFile
-    var fullPath = path.join(appPath, 'index.html');
     angularUtils.rewriteFile({
       file: indexFile,
       needle: '<!-- endbuild -->',
@@ -99,6 +105,6 @@ Generator.prototype.addScriptToIndex = function (script) {
       ]
     });
   } catch (e) {
-    console.log('\nUnable to find '.yellow + fullPath + '. Reference to '.yellow + script + '.js ' + 'not added.\n'.yellow);
+    console.log('\nUnable to find '.yellow + indexFile + '. Reference to '.yellow + script + '.js ' + 'not added.\n'.yellow);
   }
 };
