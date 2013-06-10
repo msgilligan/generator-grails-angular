@@ -14,9 +14,11 @@ var Generator = module.exports = function Generator() {
   if (typeof this.env.options.appPath === 'undefined') {
     try {
       this.env.options.appPath = require(path.join(process.cwd(), 'bower.json')).appPath;
+      this.env.options.indexFile = require(path.join(process.cwd(), 'bower.json')).indexFile
     } catch (e) {}
     this.env.options.webAppPath = 'web-app;'
     this.env.options.appPath = this.env.options.appPath || 'web-app/angular/app';
+    this.env.options.indexFile = this.env.options.indexFile || 'grails-app/views/index.gsp' 
   }
   this.appPath = this.env.options.appPath;
 
