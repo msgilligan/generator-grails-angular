@@ -5,13 +5,13 @@ describe 'Controller: <%= _.classify(injectableName) %>Ctrl', () ->
   # load the controller's module
   beforeEach module '<%= _.camelize(appname) %>App'
 
-  <%= _.classify(name) %>Ctrl = {}
+  <%= _.classify(injectableName) %>Ctrl = {}
   scope = {}
 
   # Initialize the controller and a mock scope
   beforeEach inject ($controller) ->
     scope = {}
-    <%= _.classify(name) %>Ctrl = $controller '<%= _.classify(injectableName) %>Ctrl', {
+    <%= _.classify(injectableName) %>Ctrl = $controller '<%= _.classify(injectableName) %>Ctrl', {
       $scope: scope
     }
 
