@@ -13,7 +13,7 @@ var Generator = module.exports = function Generator() {
 
   if (typeof this.env.options.appPath === 'undefined') {
     try {
-      this.env.options.appPath = require(path.join(process.cwd(), 'component.json')).appPath;
+      this.env.options.appPath = require(path.join(process.cwd(), 'bower.json')).appPath;
     } catch (e) {}
     this.env.options.webAppPath = 'web-app;'
     this.env.options.appPath = this.env.options.appPath || 'web-app/angular/app';
@@ -102,17 +102,17 @@ Generator.prototype.askForModules = function askForModules () {
     name: 'resourceModule',
     message: 'Would you like to include angular-resource.js?',
     default: 'Y/n',
-    warning: 'Yes: angular-resource added to component.json'
+    warning: 'Yes: angular-resource added to bower.json'
   }, {
     name: 'cookiesModule',
     message: 'Would you like to include angular-cookies.js?',
     default: 'Y/n',
-    warning: 'Yes: angular-cookies added to component.json'
+    warning: 'Yes: angular-cookies added to bower.json'
   }, {
     name: 'sanitizeModule',
     message: 'Would you like to include angular-sanitize.js?',
     default: 'Y/n',
-    warning: 'Yes: angular-sanitize added to component.json'
+    warning: 'Yes: angular-sanitize added to bower.json'
   }];
 
   this.prompt(prompts, function(err, props) {
@@ -157,7 +157,7 @@ Generator.prototype.createIndexHtml = function createIndexHtml() {
 };
 
 Generator.prototype.packageFiles = function () {
-  this.template( '../../templates/common/component.json', 'component.json' );
+  this.template( '../../templates/common/bower.json', 'bower.json' );
   this.template( '../../templates/common/package.json', 'package.json' );
   this.template( '../../templates/common/Gruntfile.js', 'Gruntfile.js' );
 };
